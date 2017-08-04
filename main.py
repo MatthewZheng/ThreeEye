@@ -6,7 +6,6 @@ _purpose_ = "OpenCV 3D model error detection"
 import sys
 import cv2
 import numpy as nmp
-from matplotlib import pyplot as pplot
 
 def main():
     #setup video capture on webcame
@@ -25,7 +24,7 @@ def main():
         frame[dst>0.01*dst.max()]=[0,255,0]
 
         #Apply thresholding value to remove unimportant features
-        ret, thres = cv2.threshold(frame,127,255,cv2.THRESH_BINARY)
+        ret, thres = cv2.threshold(frame,150,275,cv2.THRESH_BINARY)
 
         #convert frames to HSV
         hsv = cv2.cvtColor(thres, cv2.COLOR_BGR2HSV)
@@ -37,6 +36,7 @@ def main():
         #exit script with 'e'
         if(cv2.waitKey(1) & 0xFF == ord('e')):
             break
+
 
     vid.release()
     cv2.destroyAllWindows()
